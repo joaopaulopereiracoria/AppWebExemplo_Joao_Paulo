@@ -1,5 +1,6 @@
 using AppWebExemplo.Components;
 using AppWebExemplo.Configs;
+using AppWebExemplo.DAO;
 
 namespace AppWebExemplo
 {
@@ -15,6 +16,8 @@ namespace AppWebExemplo
 
             //Configuração da Conexão com o Banco de dados MYSQL
             builder.Services.AddScoped<Conexao>();
+            builder.Services.AddScoped<ProcessoDAO>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
