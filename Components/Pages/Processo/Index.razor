@@ -2,102 +2,83 @@
 @rendermode InteractiveServer
 @inject ProcessoDAO dao;
 
-
 <PageTitle>Processos - Sistema de Controle de Processos</PageTitle>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-	<div>
-		<h2 class="fw-bold mb-1">Controle de Processos</h2>
-	</div>
+    <div>
+        <h2 class="fw-bold mb-1">Controle de Processos</h2>
+    </div>
 
-	<a href="/processos/cadastro" class="btn btn-primary">
-		Novo Processo
-	</a>
+    <a href="/processos/cadastro" class="btn btn-primary">
+        Novo Processo
+    </a>
 </div>
 
 <div class="custom-table-card">
-	<div class="table-responsive">
+    <div class="table-responsive">
 
-		<table class="table align-middle">
+        <table class="table align-middle">
 
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Número</th>
-					<th>Data</th>
-					<th>Interessado</th>
-					<th>Assuntos</th>
-					<th>Situação</th>
-					<th>Ações</th>
-				</tr>
-			</thead>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Número</th>
+                    <th>Data</th>
+                    <th>Interessado</th>
+                    <th>Assuntos</th>
+                    <th>Situação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
 
-			<tbody>
+            <tbody>
 
-				@foreach (var p in processos)
-				{
-					<tr>
-						<td>@p.Id</td>
-						<td>@p.Numero</td>
-						<td>@p.Data</td>
-						<td>@p.Interessado</td>
-						<td class="text-truncate">@p.Assunto</td>
-						<td>
-							<i class="bi bi-clock"></i> @p.Situacao
-						</td>
-						<td class="text-end">
-							<div class="btn-group btn-group-sm">
-								<a href="#" class="btn btn-light border text-primary" title="Editar">
-									<i class="bi bi-pencil"></i>
-								</a>
-								<a href="#" class="btn btn-light border text-primary" title="Excluir">
-									<i class="bi bi-trash"></i>
-								</a>
-							</div>
-						</td>
-					</tr>
-				}
+                @foreach (var p in processos)
+                {
+                    <tr>
+                        <td>@p.Id</td>
+                        <td>@p.Numero</td>
+                        <td>@p.Data</td>
+                        <td>@p.Interessado</td>
+                        <td class="text-truncate">@p.Assunto</td>
+                        <td>
+                            <i class="bi bi-clock"></i> @p.Situacao
+                        </td>
+                        <td class="text-end">
+                            <div class="btn-group btn-group-sm">
+                                <a href="@($"/processos/editar/{p.Id}")"
+                                   class="btn btn-light border text-primary"
+                                   title="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
 
+                                <a href="#"
+                                   class="btn btn-light border text-danger"
+                                   title="Excluir">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
 
+            </tbody>
 
-				<tr>
-					<td>2</td>
-					<td>2026/0002</td>
-					<td>2026-09-28</td>
-					<td>Maria Gasolina</td>
-					<td class="text-truncate">Solicitação de Isenção de IPTU</td>
-					<td>
-						<i class="bi bi-check"></i> Concluído
-					</td>
-					<td class="text-end">
-						<div class="btn-group btn-group-sm">
-							<a href="#" class="btn btn-light border text-primary" title="Editar">
-								<i class="bi bi-pencil"></i>
-							</a>
-							<a href="#" class="btn btn-light border text-primary" title="Excluir">
-								<i class="bi bi-trash"></i>
-							</a>
-						</div>
-					</td>
-				</tr>
-
-			</tbody>
-
-		</table>
-	</div>
+        </table>
+    </div>
 </div>
 
 @code {
 
-	private List<Processo>? processos;
+    private List<Processo>? processos;
 
-	protected override void OnInitialized()
-	{
-		CarregarProcessos();
-	}
+    protected override void OnInitialized()
+    {
+        CarregarProcessos();
+    }
 
-	private void CarregarProcessos()
-	{
-		processos = dao.Listar();
-	}
+    private void CarregarProcessos()
+    {
+        processos = dao.Listar();
+    }
 }
